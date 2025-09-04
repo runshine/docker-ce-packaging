@@ -22,7 +22,8 @@
         "arches": [
             "amd64",
             "aarch64",
-            "armhf"
+            "armhf",
+            "armel"
         ],
         "description": "Debian 11 (oldstable)"
     },
@@ -31,7 +32,8 @@
         "arches": [
             "amd64",
             "aarch64",
-            "armhf"
+            "armhf",
+            "armel"
         ],
         "description": "Debian 12 (stable)"
     },
@@ -40,7 +42,8 @@
         "arches": [
             "amd64",
             "aarch64",
-            "armhf"
+            "armhf",
+            "armel"
         ],
         "description": "Debian 13 (Next stable)"
     },
