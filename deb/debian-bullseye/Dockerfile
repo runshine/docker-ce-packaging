@@ -33,7 +33,9 @@ ENV SUITE=${SUITE}
 ENV VERSION_ID=${VERSION_ID}
 
 COPY --link --from=golang /usr/local/go /usr/local/go
-
+RUN sed -i '/^GOARM=/c\GOARM=5' /usr/local/go/go.env
+RUN grep -q '^GOARM=' /usr/local/go/go.env || echo "GOARM=5" >> /usr/local/go/go.env
+RUN cat /usr/local/go/go.env
 WORKDIR /root/build-deb
 COPY build-deb /root/build-deb/build-deb
 
