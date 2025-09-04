@@ -56,3 +56,6 @@ jobs:
         name: Build
         run: |
           make ARCH=${{ matrix.target.arch }} ${{ matrix.target.distro }} 
+      - name: List Dir
+        run: ls -lRt ${{ github.workspace }}
+        
