@@ -64,9 +64,9 @@ RUN?=docker run --rm \
 	$(RUN_FLAGS) \
 	rpmbuild-$@/$(ARCH) $(RPMBUILD_FLAGS)
 
-FEDORA_RELEASES ?= fedora-41 fedora-42
+FEDORA_RELEASES ?= fedora-41 fedora-42 fedora-43
 CENTOS_RELEASES ?= centos-9 centos-10
-RHEL_RELEASES ?= rhel-8 rhel-9
+RHEL_RELEASES ?= rhel-8 rhel-9 rhel-10
 
 DISTROS := $(FEDORA_RELEASES) $(CENTOS_RELEASES) $(RHEL_RELEASES)
 BUNDLES := $(patsubst %,rpmbuild/bundles-ce-%-$(DPKG_ARCH).tar.gz,$(DISTROS))
@@ -92,6 +92,11 @@ centos: $(CENTOS_RELEASES) ## build all centos rpm packages
 
 .PHONY: rhel
 rhel: $(RHEL_RELEASES) ## build all rhel rpm packages
+# The nftables-devel package is only available in RHEL CRB. For now, build
+# with tag "no_libnftables", so dockerd will exec the nft tool, and this
+# package is not required. Note that this '--define' is also hard-coded in
+# each of the rhel-*/Dockerfile files.
+$(RHEL_RELEASES): RPMBUILD_EXTRA_FLAGS += --define '_no_libnftables true'
 
 .PHONY: $(DISTROS)
 $(DISTROS): sources

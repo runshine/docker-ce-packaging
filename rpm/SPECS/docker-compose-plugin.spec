@@ -13,7 +13,7 @@ Vendor: Docker
 Packager: Docker <support@docker.com>
 
 Enhances: docker-ce-cli
-Recommends: docker-buildx-plugin
+Recommends: docker-buildx-plugin >= 0.17.0
 
 BuildRequires: bash
 
@@ -38,7 +38,7 @@ ver="$(${RPM_BUILD_ROOT}%{_libexecdir}/docker/cli-plugins/docker-compose docker-
 %install
 install -D -p -m 0755 ${RPM_BUILD_DIR}/src/compose/bin/docker-compose ${RPM_BUILD_ROOT}%{_libexecdir}/docker/cli-plugins/docker-compose
 
-for f in LICENSE MAINTAINERS NOTICE README.md; do
+for f in LICENSE NOTICE README.md; do
     install -D -p -m 0644 "${RPM_BUILD_DIR}/src/compose/$f" "docker-compose-plugin-docs/$f"
 done
 

@@ -11,6 +11,7 @@ Build-Depends: bash,
                gcc,
                git,
                libc-dev,
+               libnftables-dev,
                libsystemd-dev,
                libtool,
                make,
@@ -26,6 +27,7 @@ Pre-Depends: init-system-helpers (>= 1.54~)
 Depends: containerd.io (>= 1.7.27),
          docker-ce-cli,
          iptables,
+         nftables,
          ${shlibs:Depends}
 Recommends: apparmor,
             ca-certificates,
@@ -83,14 +85,14 @@ Conflicts: rootlesskit
 Replaces: rootlesskit
 Breaks: rootlesskit
 # slirp4netns (>= 0.4.0) is available in Debian since 11 and Ubuntu since 19.10
-Recommends: slirp4netns (>= 0.4.0)
+Recommends: slirp4netns (>= 0.4.0) | passt
 # Unlike RPM, DEB packages do not contain "Recommends: fuse-overlayfs (>= 0.7.0)" here,
 # because Debian (since 10) and Ubuntu support the kernel-mode rootless overlayfs.
 Description: Rootless support for Docker.
  Use dockerd-rootless.sh to run the daemon.
  Use dockerd-rootless-setuptool.sh to setup systemd for dockerd-rootless.sh.
  This package contains RootlessKit, but does not contain VPNKit.
- Either VPNKit or slirp4netns (>= 0.4.0) needs to be installed separately.
+ Either slirp4netns (>= 0.4.0), passt, or VPNKit needs to be installed separately.
 Homepage: https://docs.docker.com/engine/security/rootless/
 
 Package: docker-buildx-plugin
@@ -105,7 +107,7 @@ Homepage: https://github.com/docker/buildx
 Package: docker-compose-plugin
 Priority: optional
 Architecture: linux-any
-Recommends: docker-buildx-plugin
+Recommends: docker-buildx-plugin (>= 0.17.0)
 Enhances: docker-ce-cli
 Description: Docker Compose (V2) plugin for the Docker CLI.
  This plugin provides the 'docker compose' subcommand.

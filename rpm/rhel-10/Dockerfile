@@ -2,8 +2,8 @@
 
 ARG GO_IMAGE=golang:latest
 ARG DISTRO=rhel
-ARG SUITE=8
-ARG BUILD_IMAGE=registry.access.redhat.com/ubi8/ubi
+ARG SUITE=10
+ARG BUILD_IMAGE=registry.access.redhat.com/ubi10/ubi
 
 FROM ${GO_IMAGE} AS golang
 
@@ -18,8 +18,8 @@ RUN --mount=type=secret,id=rh-user --mount=type=secret,id=rh-pass <<-EOT
 			--username="$(cat /run/secrets/rh-user)" \
 			--password="$(cat /run/secrets/rh-pass)"
 
-		subscription-manager repos --enable codeready-builder-for-rhel-8-$(arch)-rpms
-		# dnf config-manager --set-enabled codeready-builder-for-rhel-8-$(arch)-rpms
+		subscription-manager repos --enable codeready-builder-for-rhel-10-$(arch)-rpms
+		# dnf config-manager --set-enabled codeready-builder-for-rhel-10-$(arch)-rpms
 	fi
 EOT
 
