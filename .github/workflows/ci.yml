@@ -72,7 +72,7 @@ jobs:
       -
         name: Build
         run: |
-          make DOCKER_CLI_REF=v29.1.2 DOCKER_ENGINE_RE=docker-v29.1.2 ARCH=armhf debian-bullseye
+          make DOCKER_CLI_REF=v29.1.2 DOCKER_ENGINE_REF=docker-v29.1.2 ARCH=armhf debian-bullseye
       - name: List Dir
         run: ls -lRt ${{ github.workspace }}
         
