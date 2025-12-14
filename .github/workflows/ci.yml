@@ -58,7 +58,7 @@ jobs:
   #       run: ls -lRt ${{ github.workspace }}
         
   build:
-    runs-on: 'ubuntu-24.04-arm'
+    runs-on: 'ubuntu-24.04'
     timeout-minutes: 60 # guardrails timeout for the whole job
     steps:
       - name: Checkout
@@ -66,10 +66,6 @@ jobs:
         
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-        
-      - name: Build
-        run: |
-          make DOCKER_CLI_REF=v29.1.2 DOCKER_ENGINE_REF=docker-v29.1.2 ARCH=armhf debian-bullseye
           
       - name: Build
         run: |
@@ -83,16 +79,6 @@ jobs:
         with:
           name: dockerce-linux-armel
           path: ${{ github.workspace }}/deb/debbuild/debian-bullseye/*
-
-      - name: Create Release deb
-        uses: ncipollo/release-action@v1
-        with:
-          tag: v29.1.2
-          name: "Release v29.1.2-linux-armel"
-          artifacts: "${{ github.workspace }}/deb/debbuild/debian-bullseye/*.deb"
-          artifactErrorsFailBuild: false
-          allowUpdates: true  # 允许更新已存在的release
-          token: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Create Release tar.gz
         uses: ncipollo/release-action@v1
