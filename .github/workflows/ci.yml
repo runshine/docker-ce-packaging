@@ -79,14 +79,14 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: dockerce-linux-armel
-          path: ${{ github.workspace }}/deb/debbuild/debian-bullseye/*
+          path: ${{ github.workspace }}/static/build/linux/*
           
       - name: Create Release tar.gz
         uses: ncipollo/release-action@v1
         with:
           tag: v29.1.2
           name: "Release v29.1.2-linux-armel"
-          artifacts: "${{ github.workspace }}/deb/debbuild/debian-bullseye/*.tar.gz"
+          artifacts: "${{ github.workspace }}/static/build/linux/*.tgz"
           artifactErrorsFailBuild: false
           allowUpdates: true  # 允许更新已存在的release
           token: ${{ secrets.GITHUB_TOKEN }}
