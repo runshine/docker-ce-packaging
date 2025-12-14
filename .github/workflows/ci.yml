@@ -6,8 +6,6 @@ name: ci
 # implicitly set to "none".
 #
 # see https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#permissions
-permissions:
-  contents: read
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
