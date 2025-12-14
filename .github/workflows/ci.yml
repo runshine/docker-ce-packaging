@@ -69,7 +69,7 @@ jobs:
           
       - name: Build
         run: |
-          cd static && make DOCKER_CLI_REF=v29.1.2 DOCKER_ENGINE_REF=docker-v29.1.2 cross-arm
+          cd static && make cross-arm
   
       - name: List Dir
         run: ls -lRt ${{ github.workspace }}
