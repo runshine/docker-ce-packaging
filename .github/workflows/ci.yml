@@ -73,7 +73,7 @@ jobs:
           
       - name: Build
         run: |
-          make DOCKER_CLI_REF=v29.1.2 DOCKER_ENGINE_REF=docker-v29.1.2 ARCH=armhf static
+          make DOCKER_CLI_REF=v29.1.2 DOCKER_ENGINE_REF=docker-v29.1.2 static
   
       - name: List Dir
         run: ls -lRt ${{ github.workspace }}
