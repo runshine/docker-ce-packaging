@@ -87,17 +87,8 @@ jobs:
         with:
           tag: v29.1.2
           name: "Release v29.1.2-armel"
-          artifacts: "${{ github.workspace }}/deb/debbuild/debian-bullseye/*.deb"
+          artifacts: "${{ github.workspace }}/deb/debbuild/debian-bullseye/*"
           artifactErrorsFailBuild: false
           allowUpdates: true  # 允许更新已存在的release
           token: ${{ secrets.GITHUB_TOKEN }}
           
-      - name: Create Release tar.gz
-        uses: ncipollo/release-action@v1
-        with:
-          tag: v29.1.2
-          name: "Release v29.1.2-armel"
-          artifacts: "${{ github.workspace }}/deb/debbuild/debian-bullseye/*.tar.gz"
-          artifactErrorsFailBuild: false
-          allowUpdates: true  # 允许更新已存在的release
-          token: ${{ secrets.GITHUB_TOKEN }}
