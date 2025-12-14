@@ -61,16 +61,20 @@ jobs:
     runs-on: 'ubuntu-24.04-arm'
     timeout-minutes: 60 # guardrails timeout for the whole job
     steps:
-      -
-        name: Checkout
+      - name: Checkout
         uses: actions/checkout@v4
-      -
-        name: Set up Docker Buildx
+        
+      - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-      -
-        name: Build
+        
+      - name: Build
         run: |
           make DOCKER_CLI_REF=v29.1.2 DOCKER_ENGINE_REF=docker-v29.1.2 ARCH=armhf debian-bullseye
+          
+      - name: Build
+        run: |
+          make DOCKER_CLI_REF=v29.1.2 DOCKER_ENGINE_REF=docker-v29.1.2 ARCH=armhf static
+  
       - name: List Dir
         run: ls -lRt ${{ github.workspace }}
 
