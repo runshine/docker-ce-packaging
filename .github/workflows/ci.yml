@@ -70,7 +70,7 @@ jobs:
       - name: Build
         run: |
           make checkout
-          cd static && make cross-arm
+          cd static && make TARGETPLATFORM=linux/arm/v6 static-linux
   
       - name: List Dir
         run: ls -lRt ${{ github.workspace }}
